@@ -35,7 +35,6 @@ class SongController extends AbstractController
         $songArray = $this->songTransformer->transformList($songs);
         return new JsonResponse($songArray, Response::HTTP_OK);
 
-
     }
 
     /**
@@ -50,7 +49,7 @@ class SongController extends AbstractController
     }
 
     /**
-     * @Route("/{songId}", methods={"PUT"})
+     * @Route("/{songId}", methods={"PATCH"})
      * @ParamConverter("song", options={"id" = "songId"})
      */
     public function updateSong(Request $request, Song $song): JsonResponse
