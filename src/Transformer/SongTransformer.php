@@ -22,6 +22,15 @@ class SongTransformer implements DataTransformerInterface
         ];
     }
 
+    public function transformList(array $collection): array
+    {
+        $results = [];
+        foreach ($collection as $item) {
+            $results[] = $this->transform($item);
+        }
+        return $results;
+    }
+
     public function reverseTransform(mixed $value)
     {
         // TODO: Implement reverseTransform() method.
