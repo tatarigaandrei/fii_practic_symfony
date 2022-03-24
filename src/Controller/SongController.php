@@ -15,8 +15,7 @@ class SongController
      */
     public function createSong(Request $request)
     {
-//        dd($request->getContent());
-//        dd($request->request->all());
+        dd($request->request->all());
     }
 
 }
