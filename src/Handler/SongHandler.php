@@ -4,7 +4,6 @@ namespace App\Handler;
 
 use App\Entity\Song;
 use App\Exception\InvalidFormException;
-use App\Exception\ValidationException;
 use App\Form\SongFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
