@@ -13,19 +13,19 @@ class Song
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 11)]
-    private $videoId;
+    private ?string $videoId;
 
     #[ORM\Column(type: 'integer')]
-    private $start;
+    private ?int $start;
 
     #[ORM\Column(type: 'integer')]
-    private $end;
+    private ?int $end;
 
-    #[ORM\OneToMany(mappedBy: 'song', targetEntity: Answer::class)]
-    private $answers;
+    #[ORM\OneToMany(mappedBy: 'song', targetEntity: Answer::class, cascade: ["remove"])]
+    private ?Collection $answers;
 
     public function __construct()
     {
@@ -42,7 +42,7 @@ class Song
         return $this->videoId;
     }
 
-    public function setVideoId(string $videoId): self
+    public function setVideoId(?string $videoId): self
     {
         $this->videoId = $videoId;
 
@@ -54,7 +54,7 @@ class Song
         return $this->start;
     }
 
-    public function setStart(int $start): self
+    public function setStart(?int $start): self
     {
         $this->start = $start;
 
@@ -66,7 +66,7 @@ class Song
         return $this->end;
     }
 
-    public function setEnd(int $end): self
+    public function setEnd(?int $end): self
     {
         $this->end = $end;
 
@@ -101,5 +101,10 @@ class Song
         }
 
         return $this;
+    }
+
+    public function checkAnswer(Answer $answer): bool
+    {
+        return $answer->isCorrect() && $answer->getSong() === $this;
     }
 }

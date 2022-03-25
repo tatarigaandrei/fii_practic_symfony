@@ -11,16 +11,16 @@ class Answer
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 500)]
-    private $text;
+    private ?string $text;
 
     #[ORM\Column(type: 'boolean')]
-    private $isCorrect;
+    private bool $isCorrect;
 
-    #[ORM\ManyToOne(targetEntity: Song::class, inversedBy: 'answers')]
-    private $song;
+    #[ORM\ManyToOne(targetEntity: Song::class, inversedBy: 'answers', cascade: ["persist"])]
+    private ?Song $song;
 
     public function getId(): ?int
     {
@@ -39,17 +39,22 @@ class Answer
         return $this;
     }
 
-    public function getIsCorrect(): ?bool
+    /**
+     * @return bool
+     */
+    public function isCorrect(): bool
     {
         return $this->isCorrect;
     }
 
-    public function setIsCorrect(bool $isCorrect): self
+    /**
+     * @param bool $isCorrect
+     */
+    public function setIsCorrect(bool $isCorrect): void
     {
         $this->isCorrect = $isCorrect;
-
-        return $this;
     }
+
 
     public function getSong(): ?Song
     {

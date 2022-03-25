@@ -47,7 +47,7 @@ class AnswerController extends AbstractController
     public function getAnswer(Answer $answer): JsonResponse
     {
         $answerArray = $this->answerTransformer->transform($answer);
-        return new JsonResponse($answerArray, Response::HTTP_OK);
+        return new JsonResponse(shuffle($answerArray), Response::HTTP_OK);
     }
 
 

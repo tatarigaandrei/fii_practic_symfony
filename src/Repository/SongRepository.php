@@ -21,6 +21,18 @@ class SongRepository extends ServiceEntityRepository
         parent::__construct($registry, Song::class);
     }
 
+    public function findSongsWithAnswers()
+    {
+        $queryBuilder = $this->createQueryBuilder('song');
+
+        $queryBuilder->join('song.answers', 'answer');
+        $queryBuilder->groupBy("song.id");
+        $queryBuilder->having("COUNT(answer.id) >=2");
+        $queryBuilder->setMaxResults(10);
+
+        return $queryBuilder->getQuery()->execute();
+    }
+
     /**
      * @throws ORMException
      * @throws OptimisticLockException

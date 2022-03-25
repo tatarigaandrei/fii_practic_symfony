@@ -23,7 +23,8 @@ class AnswerFormType extends AbstractType
                 ]
             ])
             ->add('is_correct', CheckboxType::class, [
-                'property_path' => 'isCorrect'
+                'property_path' => 'isCorrect',
+                'false_values' => ['false', '0']
             ])
             ->add('song_id', EntityType::class, [
                 'class' => Song::class,
