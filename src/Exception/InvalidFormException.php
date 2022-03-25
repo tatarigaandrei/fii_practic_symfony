@@ -22,6 +22,7 @@ class InvalidFormException extends Exception
     {
         $this->form = $form;
 
+
         $this->transformErrors();
         parent::__construct("INVALID_FORM_EXCEPTION", Response::HTTP_BAD_REQUEST);
 
@@ -29,6 +30,9 @@ class InvalidFormException extends Exception
 
     public function transformErrors() {
         $errors = [];
+        foreach ($this->form->getErrors() as $error) {
+            $errors['form'][] = $error->getMessage();
+        }
         foreach ($this->form as $formField) {
             $name = $formField->getName();
             foreach ($formField->getErrors(true) as $error) {

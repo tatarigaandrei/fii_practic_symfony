@@ -23,8 +23,7 @@ class SongController extends AbstractController
         private SongTransformer $songTransformer,
         private SongRepository $songRepository
     )
-    {
-    }
+    {}
 
     /**
      * @Route("", methods={"GET"})
@@ -64,11 +63,10 @@ class SongController extends AbstractController
      * @Route("/{songId}", methods={"DELETE"})
      * @ParamConverter("song", options={"id" = "songId"})
      */
-    public function deleteSong(Request $request, Song $song): JsonResponse
+    public function deleteSong(Song $song): JsonResponse
     {
         $this->songHandler->delete($song);
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
-
     }
 
 }
