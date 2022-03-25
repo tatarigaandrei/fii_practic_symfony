@@ -39,7 +39,6 @@ class AnswerController extends AbstractController
     }
 
     /**
-     * @param Request $request
      * @param Answer $answer
      * @return JsonResponse
      * @Route("/{answerId}", methods={"GET"})
