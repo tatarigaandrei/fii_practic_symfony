@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/game")
+ * @Route("/api/game")
  */
 class GameController extends AbstractController
 {
