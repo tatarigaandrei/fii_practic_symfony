@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/game")
+ * @Route("/api/game")
  */
 class GameController extends AbstractController
 {
@@ -32,6 +32,7 @@ class GameController extends AbstractController
     {
         $songs = $this->songRepository->findSongsWithAnswers();
         $songsArray = $this->songTransformer->transformList($songs);
+        shuffle($songsArray);
         return new JsonResponse($songsArray, Response::HTTP_OK);
     }
 
