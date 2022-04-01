@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/song")
+ * @Route("/api/admin/song")
  */
 class SongController extends AbstractController
 {
@@ -25,8 +25,10 @@ class SongController extends AbstractController
     )
     {}
 
+
+
     /**
-     * @Route("", methods={"GET"})
+     * @Route("/all", methods={"GET"})
      */
     public function getAllSongs(): JsonResponse
     {
@@ -38,6 +40,7 @@ class SongController extends AbstractController
 
     /**
      * @Route("", methods={"POST"})
+     * @ParamConverter("song", options={"id" = "songId"})
      */
     public function createSong(Request $request): JsonResponse
     {
@@ -68,5 +71,17 @@ class SongController extends AbstractController
         $this->songHandler->delete($song);
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
+
+    /**
+     * @Route("/{songId}", methods={"GET"})
+     * @ParamConverter("song", options={"id" = "songId"})
+     */
+    public function getSong(Song $song): JsonResponse
+    {
+        $songArray = $this->songTransformer->transform($song);
+        return new JsonResponse($songArray, Response::HTTP_OK);
+
+    }
+
 
 }

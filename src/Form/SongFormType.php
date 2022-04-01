@@ -38,6 +38,8 @@ class SongFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Song::class,
+            'csrf_protection' => false,
+
         ]);
     }
 }
