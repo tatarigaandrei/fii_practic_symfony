@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/song")
+ * @Route("/api/admin/song")
  */
 class SongController extends AbstractController
 {
