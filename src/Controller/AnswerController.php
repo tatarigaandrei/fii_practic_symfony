@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Answer;
+use App\Entity\Song;
 use App\Exception\InvalidFormException;
 use App\Handler\AnswerHandler;
 use App\Repository\AnswerRepository;
@@ -37,6 +38,19 @@ class AnswerController extends AbstractController
         $answersArray = $this->answerTransformer->transformList($answers);
         return new JsonResponse($answersArray, Response::HTTP_OK);
     }
+
+    /**
+     * @return JsonResponse
+     * @Route("/song/{songId}", methods={"GET"})
+     * @ParamConverter("song", options={"id" = "songId"})
+     */
+    public function getAllAnswersForSong(Song $song): JsonResponse
+    {
+        $answers = $this->answerRepository->findBy(['song' => $song]);
+        $answersArray = $this->answerTransformer->transformList($answers);
+        return new JsonResponse($answersArray, Response::HTTP_OK);
+    }
+
 
     /**
      * @param Answer $answer
